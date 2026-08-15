@@ -144,7 +144,7 @@ export const profile = {
   /** About-section frame. "/portrait-dark.jpg" is the alternate, darker shot. */
   portraitAlt: "/portrait.png" as string | null,
   resumeUrl: "/resume.pdf",
-  siteUrl: "https://hardiksingh.dev", // [PLACEHOLDER] set your real domain before deploying
+  siteUrl: "https://hardik-portfolio-new.vercel.app",
 };
 
 /** Hero headline, broken into the lines it should render on. */

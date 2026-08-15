@@ -47,7 +47,7 @@ npm run lint     # eslint
 
 ### Things to set before deploying
 
-1. **`profile.siteUrl`** — currently `https://hardiksingh.dev`. This feeds canonical URLs, Open Graph tags, the sitemap and structured data.
+1. **`profile.siteUrl`** — currently `https://hardik-portfolio-new.vercel.app`. This feeds canonical URLs, Open Graph tags, the sitemap and structured data. Replace it when you connect a custom domain.
 2. **`testimonials`** — an empty array. The carousel is skipped entirely while it stays empty, so the site never shows an invented endorsement. Add real quotes and the section reappears.
 
 `github.stats` and `github.repos` are hardcoded from the real account rather than fetched, so the section costs no network requests and cannot fail at runtime. They will drift as you push; refresh them with:
