@@ -84,6 +84,8 @@ export type Project = {
   links: { github?: string; demo?: string; caseStudy?: string };
   /** Drop a real screenshot in /public and point here to replace the generated visual. */
   screenshot?: string;
+  /** Path to a local demo recording (e.g. /public/demo.mp4). Shown as a "Watch demo" lightbox. */
+  video?: string;
   accent: "iris" | "cyan" | "ember";
   architecture: { nodes: ArchNode[]; edges: ArchEdge[] };
 };
@@ -126,19 +128,19 @@ export const profile = {
   initials: "HS",
   /** Cycled by the hero's animated role marquee. */
   roles: [
-    "Software Engineer",
-    "Backend & Distributed Systems",
-    "AI Platform Engineering",
-    "Cloud Native",
+    "Backend Engineer",
+    "Java & Spring Boot",
+    "AI / LLMs",
+    "Distributed Systems",
   ],
-  headline: "I build intelligent systems, not just services.",
+  headline: "Backend engineer at Grid Dynamics, working in Java on Visa's merchant platform.",
   summary:
-    "Software Engineer at Grid Dynamics building AI-powered backend platforms. I work where distributed systems meet applied AI: asynchronous APIs, LLM integration, and cloud-native infrastructure that turns manual workflows into measurable throughput.",
+    "Software Engineer at Grid Dynamics, currently engaged with Visa building Java backend services for merchant management on a global card network. Previously shipped AI-powered hiring platforms with FastAPI, LLMs, and Google Cloud.",
   location: "Bengaluru, India",
   timezone: "IST · UTC+5:30",
   email: "ihardik.112@gmail.com",
   phone: "+91 95696 46737",
-  availability: "Open to Software Engineering opportunities",
+  availability: "Software Engineer at Grid Dynamics",
   /** Hero plate. Set to null to fall back to the generated wireframe composition. */
   portrait: "/portrait.png" as string | null,
   /** About-section frame. "/portrait-dark.jpg" is the alternate, darker shot. */
@@ -149,13 +151,14 @@ export const profile = {
 
 /** Hero headline, broken into the lines it should render on. */
 export const hero = {
-  /** Each entry is one line. `accent` renders in serif italic. */
+  /** Each entry is one line, kept short so it never collides with the portrait plate. `accent` renders in serif italic. */
   lines: [
-    { text: "Systems that" },
-    { text: "think", accent: "at scale." },
+    { text: "Backend engineer," },
+    { text: "Java & AI," },
+    { text: "built", accent: "at scale." },
   ] as { text: string; accent?: string }[],
   intro:
-    "I am a Software Engineer at Grid Dynamics, building AI-powered backend platforms that replace manual work with measurable throughput. Most of my time goes to asynchronous APIs, LLM integration and cloud-native infrastructure.",
+    "I am a Software Engineer at Grid Dynamics, currently engaged with Visa — a leading global card network — building Java backend services for merchant management. I care about correct data, clear API contracts, and changes that hold up in production. Before this engagement I spent a year shipping AI hiring systems on FastAPI, LLMs and GCP — that work is still where my proudest numbers live.",
   primaryCta: { label: "View selected work", href: "#projects" },
   secondaryCta: { label: "Read the story", href: "#about" },
   scrollHint: "Scroll",
@@ -227,9 +230,9 @@ export const about = {
   eyebrow: "About",
   title: "I would rather design the system than just ship the endpoint.",
   paragraphs: [
-    "I am Hardik, a Software Engineer at Grid Dynamics working on enterprise AI platforms that automate hiring workflows. I graduated from MNNIT Allahabad with a B.Tech in Computer Science and Engineering, and I have spent every role since trying to answer the same question: what has to be true for this system to still work when the load, the data, or the team triples?",
-    "My work sits at the intersection of backend engineering and applied AI. That means asynchronous FastAPI services, LLM integration through Vertex AI and GPT-4, PostgreSQL schemas designed for the query patterns they will actually see, and containerised deployments on Cloud Run that a small team can operate without a dedicated platform group.",
-    "What I care about is measurable impact rather than technology for its own sake. Ninety-one percent less screening time and a thirty-five percent accuracy improvement are the numbers I am proud of, because behind each one is a design decision that could have gone the other way.",
+    "I am Hardik, a Software Engineer at Grid Dynamics in Bengaluru, currently engaged with Visa — a leading global card network — building Java backend services for merchant management. I graduated from MNNIT Allahabad with a B.Tech in Computer Science and Engineering, and I have spent every role since asking the same question: what has to stay true when traffic, data, or team size grows?",
+    "On the Visa engagement my work is production Java — merchant workflows, synchronisation with downstream processing, and API contracts that integrators can actually debug. Before that I was on Grid Dynamics' own enterprise AI platforms: asynchronous FastAPI, Vertex AI and GPT-4, PostgreSQL on Cloud Run, and the kind of throughput numbers that only matter if recruiters feel them.",
+    "I am not tied to one stack. I go where the problem is — Java and Spring where the enterprise boundary is, Python and FastAPI where models and async I/O dominate. What I optimise for is impact you can measure, whether that is fresher merchant reporting or ninety-one percent less screening time.",
   ],
   principles: [
     {
@@ -263,8 +266,13 @@ export const about = {
     },
     {
       year: "Aug 2025",
-      title: "Became a Junior Software Engineer",
-      body: "Now own backend systems for an AI talent acquisition platform used to automate real hiring workflows.",
+      title: "Junior Software Engineer at Grid Dynamics",
+      body: "Owned backend systems for an AI talent acquisition platform used to automate real hiring workflows.",
+    },
+    {
+      year: "Sep 2026",
+      title: "Engaged with Visa, as part of Grid Dynamics",
+      body: "Still at Grid Dynamics — now building Java backend enhancements across merchant management for Visa, a leading global card network.",
     },
   ] satisfies TimelineEntry[],
 };
@@ -285,7 +293,14 @@ export const education = {
       score: "95.4%",
     },
   ],
-  certifications: [{ name: "AWS Certified Cloud Practitioner", issuer: "Amazon Web Services" }],
+  certifications: [
+    {
+      name: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services",
+      verifyUrl:
+        "https://cp.certmetrics.com/amazon/en/public/verify/credential/b03b92380335419ebc6a376ae1c539ad",
+    },
+  ],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -374,6 +389,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "JUnit" },
       { name: "Mockito" },
       { name: "Agile / Scrum" },
+      { name: "AI assisted tools:", note: "Claude, Codex, Gemini, Cursor" },
     ],
   },
 ];
@@ -386,12 +402,29 @@ export const experience: Role[] = [
   {
     company: "Grid Dynamics",
     companyUrl: "https://www.griddynamics.com",
+    role: "Software Engineer · Visa (client engagement)",
+    period: "Sep 2026 — Present",
+    start: "2026",
+    location: "Bengaluru, India",
+    summary:
+      "Engaged by Grid Dynamics with Visa — a leading global card network — engineering Java backend enhancements across merchant management workflows, production defect resolution, and business-driven platform improvements.",
+    achievements: [
+      "Engineered Java backend enhancements across merchant management workflows, delivering production features, defect resolutions, and business-driven platform improvements.",
+      "Resolved a merchant data synchronisation defect by integrating post-onboarding update flows with downstream processing, eliminating stale reporting data through cross-team collaboration.",
+      "Enhanced API contracts with three validation scenarios, replacing generic HTTP 400 responses with descriptive error enums to improve merchant integration and diagnostics.",
+      "Proposed and introduced clearer Virtual Terminal terminology, aligning merchant-facing labels with business functionality to reduce ambiguity.",
+    ],
+    stack: ["Java", "Spring Boot", "REST APIs", "Microservices", "Maven", "JUnit"],
+  },
+  {
+    company: "Grid Dynamics",
+    companyUrl: "https://www.griddynamics.com",
     role: "Junior Software Engineer",
-    period: "Aug 2025 — Present",
+    period: "Aug 2025 — Sep 2026",
     start: "2025",
     location: "Bengaluru, India",
     summary:
-      "Own backend systems for an AI-powered talent acquisition platform: the APIs, the data model, the model integration, and the deployment path that carries them to production.",
+      "Owned backend systems for an AI-powered talent acquisition platform: the APIs, the data model, the model integration, and the deployment path that carried them to production.",
     achievements: [
       "Built the backend for an AI talent acquisition platform that automates candidate screening, removing 90% of the manual effort recruiters previously spent on first-pass review.",
       "Shipped asynchronous, scalable FastAPI services with advanced filtering, pagination and real-time delivery, improving recruiter workflow efficiency by 35%.",
@@ -422,6 +455,22 @@ export const experience: Role[] = [
     stack: ["Python", "FastAPI", "PostgreSQL", "ChromaDB", "Redis", "Firecracker", "AWS EC2"],
   },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* Product demo (hash link — must stay before projects; learning-assistant refs href) */
+/* -------------------------------------------------------------------------- */
+
+export const productDemo = {
+  /** DOM id and hash target — share as `${profile.siteUrl}${href}`. */
+  sectionId: "demo",
+  href: "#demo",
+  navLabel: "Demo",
+  eyebrow: "Product demo",
+  title: "LLM-Powered Learning Assistant, in motion.",
+  description:
+    "A short walkthrough of the assistant turning raw source material into something you can actually practise against — the same build referenced in the projects above.",
+  slug: "learning-assistant",
+};
 
 /* -------------------------------------------------------------------------- */
 /* 6 · Featured projects                                                       */
@@ -518,7 +567,8 @@ export const projects: Project[] = [
       { value: "+30%", label: "Learner engagement" },
     ],
     stack: ["FastAPI", "PostgreSQL", "ChromaDB", "Redis", "Firecracker", "Docker", "AWS EC2"],
-    links: { github: "https://github.com/Hardik-111" },
+    links: { github: "https://github.com/Hardik-111", demo: productDemo.href },
+    video: "/LLM_Learning_Assistant_Demo.mp4",
     architecture: {
       nodes: [
         { id: "sources", label: "Sources", sublabel: "pdf · repo · docs", x: 9, y: 26, tier: "edge", detail: "PDFs, GitHub repositories, documentation sites and raw web links." },
@@ -599,40 +649,7 @@ export const projects: Project[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/* 7 · Architecture showcase                                                   */
-/* -------------------------------------------------------------------------- */
-
-export const architectureShowcase = {
-  eyebrow: "Architecture",
-  title: "How I put an AI product together.",
-  description:
-    "This is the shape most of my work takes: a thin async edge, model calls pushed off the request path, and storage chosen per access pattern rather than per habit. Select a node to see what it is responsible for and what it is allowed to fail at.",
-  nodes: [
-    { id: "client", label: "Client", sublabel: "web app", x: 9, y: 48, tier: "edge", detail: "Talks to exactly one API surface and never waits on a model call to render." },
-    { id: "run", label: "Cloud Run", sublabel: "containerised · scales to zero", x: 27, y: 48, tier: "edge", detail: "Docker images deployed per revision. Scaling to zero between bursts is where the cost saving lives." },
-    { id: "api", label: "Async API", sublabel: "FastAPI", x: 46, y: 26, tier: "service", detail: "Non-blocking handlers with filtering and pagination built in. Owns validation and the response contract, nothing else." },
-    { id: "worker", label: "Background Worker", sublabel: "long-running", x: 46, y: 70, tier: "service", detail: "Everything that takes seconds rather than milliseconds: inference, parsing, scoring, re-indexing." },
-    { id: "llm", label: "LLM Layer", sublabel: "Vertex AI · GPT-4", x: 68, y: 84, tier: "async", detail: "Treated as a dependency with a latency and cost budget, never as a synchronous function call." },
-    { id: "vector", label: "Vector Store", sublabel: "embeddings", x: 68, y: 58, tier: "data", detail: "Semantic retrieval. Rebuildable from source at any time, so it is never the system of record." },
-    { id: "pg", label: "Cloud SQL", sublabel: "PostgreSQL · JSONB", x: 68, y: 30, tier: "data", detail: "System of record. Relational where the invariants are, JSONB where the shape genuinely varies." },
-    { id: "cache", label: "Redis", sublabel: "hot path", x: 88, y: 30, tier: "data", detail: "Disposable by design. A cold cache must never be able to take the system down." },
-    { id: "obs", label: "Telemetry", sublabel: "latency · cost", x: 88, y: 70, tier: "async", detail: "Per-endpoint latency and per-request model spend, because an unmeasured cost is an unmanaged one." },
-  ] satisfies ArchNode[],
-  edges: [
-    { from: "client", to: "run" },
-    { from: "run", to: "api" },
-    { from: "api", to: "pg", label: "reads" },
-    { from: "api", to: "cache" },
-    { from: "api", to: "worker", label: "enqueue", async: true },
-    { from: "worker", to: "llm", async: true },
-    { from: "worker", to: "vector", async: true },
-    { from: "worker", to: "pg" },
-    { from: "worker", to: "obs", async: true },
-  ] satisfies ArchEdge[],
-};
-
-/* -------------------------------------------------------------------------- */
-/* 8 · Technical expertise                                                     */
+/* 7 · Technical expertise                                                     */
 /* -------------------------------------------------------------------------- */
 
 export const expertise: Expertise[] = [
@@ -837,14 +854,14 @@ export const testimonials: Testimonial[] = [];
 export const contact = {
   eyebrow: "Contact",
   title: "Let's build something that scales.",
-  body: "I am looking for backend and platform work where correctness and scale both matter, and where AI is part of the system rather than the pitch. If that sounds like what you are building, I would like to hear about it.",
+  body: "I am at Grid Dynamics, currently engaged with Visa on merchant platforms, and still enjoy talking backend design, Java services, and the AI systems work I did before. If you want to compare notes or explore something together, reach out.",
   cta: { label: "Start a conversation", href: "mailto:ihardik.112@gmail.com" },
   secondary: { label: "Download résumé", href: "/resume.pdf" },
   responseTime: "Usually replies within a day",
 };
 
 export const footer = {
-  message: "Building backend systems that make intelligent products possible.",
+  message: "Grid Dynamics engineer — Java for Visa today, AI platforms before that.",
   colophon: "Next.js · TypeScript · Tailwind · Framer Motion · GSAP · Three.js",
 };
 
@@ -861,9 +878,9 @@ export const sectionCopy = {
   },
   experience: {
     eyebrow: "Experience",
-    title: "Two roles, one product surface, a lot of numbers.",
+    title: "One company, two very different engagements.",
     description:
-      "I joined Grid Dynamics as an intern and stayed to own backend systems in production. Every achievement below has a measurement attached to it.",
+      "Still at Grid Dynamics — currently engaged with Visa on Java merchant platforms. The AI platform numbers below came from the engagement before this one, and every bullet is tied to something that shipped.",
   },
   projects: {
     eyebrow: "Selected work",
@@ -896,6 +913,7 @@ export const navItems = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Work" },
+  { id: productDemo.sectionId, label: productDemo.navLabel },
   { id: "expertise", label: "Expertise" },
   { id: "contact", label: "Contact" },
 ];

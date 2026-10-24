@@ -11,15 +11,12 @@ import { Magnetic } from "@/components/fx/magnetic";
 
 export function Nav() {
   const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
   const [open, setOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    setScrolled(latest > 24);
-    setHidden(latest > previous && latest > 320 && !open);
+    setScrolled(latest > 8);
   });
 
   useEffect(() => {
@@ -52,15 +49,17 @@ export function Nav() {
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: hidden ? -96 : 0, opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 sm:pt-5"
       >
         <nav
           aria-label="Primary"
           className={cn(
-            "flex w-full max-w-4xl items-center justify-between gap-4 rounded-full px-2.5 py-2.5 transition-all duration-500 ease-premium",
-            scrolled ? "glass-strong shadow-glass" : "border border-transparent",
+            "flex w-full max-w-4xl items-center justify-between gap-4 rounded-full border px-2.5 py-2.5 backdrop-blur-xl transition-all duration-500 ease-premium",
+            scrolled
+              ? "glass-strong shadow-glass border-line/12"
+              : "border-line/8 bg-canvas/45 shadow-glass",
           )}
         >
           <a

@@ -10,8 +10,8 @@ import { About } from "@/components/sections/about";
 const Skills = dynamic(() => import("@/components/sections/skills").then((m) => m.Skills));
 const Experience = dynamic(() => import("@/components/sections/experience").then((m) => m.Experience));
 const Projects = dynamic(() => import("@/components/sections/projects").then((m) => m.Projects));
-const Architecture = dynamic(() =>
-  import("@/components/sections/architecture").then((m) => m.Architecture),
+const ProductDemo = dynamic(() =>
+  import("@/components/sections/product-demo").then((m) => m.ProductDemo),
 );
 const TechnicalExpertise = dynamic(() =>
   import("@/components/sections/expertise").then((m) => m.TechnicalExpertise),
@@ -31,7 +31,7 @@ export default function Home() {
       <Skills />
       <Experience />
       <Projects />
-      <Architecture />
+      <ProductDemo />
       <TechnicalExpertise />
       <Github />
       {testimonials.length > 0 ? <Testimonials /> : null}

@@ -188,8 +188,13 @@ function ProjectPanel({ project, index }: { project: Project; index: number }) {
             {project.links.demo ? (
               <Magnetic strength={0.25}>
                 <Button asChild variant="primary" size="sm" className="group">
-                  <a href={project.links.demo} target="_blank" rel="noreferrer noopener">
-                    Live demo
+                  <a
+                    href={project.links.demo}
+                    {...(project.links.demo.startsWith("#")
+                      ? {}
+                      : { target: "_blank", rel: "noreferrer noopener" })}
+                  >
+                    {project.links.demo.startsWith("#") ? "Watch demo" : "Live demo"}
                     <ArrowUpRight className="transition-transform duration-500 ease-premium group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </Button>

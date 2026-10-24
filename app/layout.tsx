@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     "Vertex AI",
     "LLM integration",
     "PostgreSQL",
+    "Visa",
     "Grid Dynamics",
     "portfolio",
   ],
@@ -83,7 +84,11 @@ const personSchema = {
   description,
   image: profile.portrait ? `${profile.siteUrl}${profile.portrait}` : undefined,
   address: { "@type": "PostalAddress", addressLocality: profile.location },
-  worksFor: { "@type": "Organization", name: "Grid Dynamics" },
+  worksFor: {
+    "@type": "Organization",
+    name: "Grid Dynamics",
+    description: "Currently engaged with Visa on merchant backend platforms.",
+  },
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Motilal Nehru National Institute of Technology, Allahabad",

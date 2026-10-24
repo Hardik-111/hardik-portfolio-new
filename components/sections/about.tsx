@@ -88,9 +88,20 @@ function Credentials() {
                 <p className="text-[0.9375rem] font-medium text-ink">{cert.name}</p>
                 <p className="mt-1 text-sm text-ink-muted">{cert.issuer}</p>
               </div>
-              <p className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-faint">
-                Certified
-              </p>
+              {"verifyUrl" in cert && cert.verifyUrl ? (
+                <a
+                  href={cert.verifyUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-iris transition-colors hover:text-ink"
+                >
+                  Verify credential
+                </a>
+              ) : (
+                <p className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-faint">
+                  Certified
+                </p>
+              )}
             </div>
           </RevealItem>
         ))}

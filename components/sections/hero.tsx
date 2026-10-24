@@ -88,9 +88,9 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="text-display-xl font-medium">
+          <h1 className="max-w-sm text-display-xl font-medium md:max-w-sm lg:max-w-md">
             {hero.lines.map((line, index) => (
-              <span key={line.text} className="block whitespace-nowrap">
+              <span key={line.text} className="block">
                 <SplitText
                   text={line.text}
                   by="word"
@@ -265,7 +265,7 @@ function Portrait({
     <motion.div
       aria-hidden
       style={{ y: scrollY }}
-      className="pointer-events-none absolute inset-y-0 right-[4%] z-0 hidden items-center md:flex lg:right-[5%]"
+      className="pointer-events-none absolute inset-y-0 right-[4%] z-0 hidden items-center pb-20 md:flex lg:right-[5%] lg:pb-28"
     >
       <motion.div
         style={{ x: pointerX, y: pointerY }}
