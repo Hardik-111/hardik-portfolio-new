@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { Check, Copy, Play } from "lucide-react";
 
-import { productDemo, profile, projects } from "@/content/site";
+import { absoluteSectionQueryLink, productDemo, profile, projects, sectionQueryLink } from "@/content/site";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { Reveal } from "@/components/fx/reveal";
 import { GlowField } from "@/components/fx/ambient";
@@ -14,7 +14,7 @@ export function ProductDemo() {
   const [playing, setPlaying] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const permalink = `${profile.siteUrl.replace(/\/$/, "")}${productDemo.href}`;
+  const permalink = absoluteSectionQueryLink(profile.siteUrl, productDemo.queryValue);
 
   const copyLink = useCallback(async () => {
     try {
@@ -75,7 +75,7 @@ export function ProductDemo() {
             </span>
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href={productDemo.href}
+                href={sectionQueryLink(productDemo.queryValue)}
                 className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-iris transition-colors hover:text-ink"
               >
                 Direct link

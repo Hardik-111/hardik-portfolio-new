@@ -4,15 +4,13 @@ import { testimonials } from "@/content/site";
 import { Hero } from "@/components/sections/hero";
 import { Metrics } from "@/components/sections/metrics";
 import { About } from "@/components/sections/about";
+import { ProductDemo } from "@/components/sections/product-demo";
 
 /* Everything below the second viewport is code-split. The hero and metrics
    carry the LCP, so only those two ship in the initial chunk. */
 const Skills = dynamic(() => import("@/components/sections/skills").then((m) => m.Skills));
 const Experience = dynamic(() => import("@/components/sections/experience").then((m) => m.Experience));
 const Projects = dynamic(() => import("@/components/sections/projects").then((m) => m.Projects));
-const ProductDemo = dynamic(() =>
-  import("@/components/sections/product-demo").then((m) => m.ProductDemo),
-);
 const TechnicalExpertise = dynamic(() =>
   import("@/components/sections/expertise").then((m) => m.TechnicalExpertise),
 );

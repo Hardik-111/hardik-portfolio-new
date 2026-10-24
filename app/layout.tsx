@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Instrument_Serif } from "next/font/google";
@@ -10,6 +11,7 @@ import { CursorGlow } from "@/components/fx/cursor-glow";
 import { ScrollProgress } from "@/components/fx/scroll-progress";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
+import { ScrollToSectionFromQuery } from "@/components/layout/scroll-to-section-from-query";
 
 const serif = Instrument_Serif({
   subsets: ["latin"],
@@ -131,6 +133,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
 
         <SmoothScroll>
+          <Suspense fallback={null}>
+            <ScrollToSectionFromQuery />
+          </Suspense>
           <main id="main">{children}</main>
           <Footer />
         </SmoothScroll>

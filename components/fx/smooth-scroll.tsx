@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import { registerScrollDriver, unregisterScrollDriver } from "@/lib/scroll-controller";
+
 /**
  * Owns the single Lenis instance and keeps GSAP's ScrollTrigger in step with
  * it. Anything scroll-driven in the app reads from this one loop rather than
@@ -55,7 +57,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
       document.addEventListener("click", onClick);
 
+      registerScrollDriver({
+        scrollTo: (target, options) => lenis.scrollTo(target, options),
+        refresh: () => ScrollTrigger.refresh(),
+      });
+
       dispose = () => {
+        unregisterScrollDriver();
         document.removeEventListener("click", onClick);
         gsap.ticker.remove(raf);
         lenis.destroy();

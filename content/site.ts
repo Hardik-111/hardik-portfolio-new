@@ -146,7 +146,7 @@ export const profile = {
   /** About-section frame. "/portrait-dark.jpg" is the alternate, darker shot. */
   portraitAlt: "/portrait.png" as string | null,
   resumeUrl: "/resume.pdf",
-  siteUrl: "https://hardiksingh.dev", // [PLACEHOLDER] set your real domain before deploying
+  siteUrl: "https://hardik-portfolio-new.vercel.app",
 };
 
 /** Hero headline, broken into the lines it should render on. */
@@ -457,19 +457,35 @@ export const experience: Role[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/* Product demo (hash link — must stay before projects; learning-assistant refs href) */
+/* Deep links (?section=…) — must stay before projects (learning-assistant refs link) */
 /* -------------------------------------------------------------------------- */
 
+export const sectionQueryParam = "section";
+
+export function sectionQueryLink(value: string): string {
+  return `?${sectionQueryParam}=${encodeURIComponent(value)}`;
+}
+
+export function absoluteSectionQueryLink(siteUrl: string, value: string): string {
+  const base = siteUrl.replace(/\/$/, "");
+  return `${base}${sectionQueryLink(value)}`;
+}
+
 export const productDemo = {
-  /** DOM id and hash target — share as `${profile.siteUrl}${href}`. */
   sectionId: "demo",
-  href: "#demo",
+  /** Use in share links: `${profile.siteUrl}?section=demo` (no hash — PDF-safe). */
+  queryValue: "demo",
   navLabel: "Demo",
   eyebrow: "Product demo",
   title: "LLM-Powered Learning Assistant, in motion.",
   description:
     "A short walkthrough of the assistant turning raw source material into something you can actually practise against — the same build referenced in the projects above.",
   slug: "learning-assistant",
+};
+
+/** Query value → DOM section id, e.g. ?section=demo scrolls to #demo element */
+export const sectionQueryTargets: Record<string, string> = {
+  [productDemo.queryValue]: productDemo.sectionId,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -567,7 +583,7 @@ export const projects: Project[] = [
       { value: "+30%", label: "Learner engagement" },
     ],
     stack: ["FastAPI", "PostgreSQL", "ChromaDB", "Redis", "Firecracker", "Docker", "AWS EC2"],
-    links: { github: "https://github.com/Hardik-111", demo: productDemo.href },
+    links: { github: "https://github.com/Hardik-111", demo: sectionQueryLink(productDemo.queryValue) },
     video: "/LLM_Learning_Assistant_Demo.mp4",
     architecture: {
       nodes: [
